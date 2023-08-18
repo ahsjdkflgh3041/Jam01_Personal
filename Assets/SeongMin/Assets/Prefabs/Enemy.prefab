@@ -147,7 +147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   points:
-  - {x: 71.61, y: 12.81}
-  - {x: 92.79, y: 12.81}
+  - {fileID: 0}
+  - {fileID: 0}
   isLoop: 1
   movingTime: 2

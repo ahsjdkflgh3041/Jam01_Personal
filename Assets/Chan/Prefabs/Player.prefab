@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4145446114595094029}
   - component: {fileID: 4145446114595094028}
   - component: {fileID: 4145446114595094018}
-  - component: {fileID: 4145446114595094031}
+  - component: {fileID: 4041215814894315466}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -79,7 +79,7 @@ HingeJoint2D:
   m_AngleLimits:
     m_LowerAngle: 0
     m_UpperAngle: 359
---- !u!114 &4145446114595094031
+--- !u!114 &4041215814894315466
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -91,36 +91,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 044199dcc9de45bdb36e25fd4d04e016, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  human: {fileID: 0}
+  monkey: {fileID: 0}
+  rhino: {fileID: 0}
+  gorilla: {fileID: 0}
+  finalEnemy: {fileID: 0}
+  endText: {fileID: 0}
   rb: {fileID: 4145446114595094028}
   connectedRb: {fileID: 0}
   previousConnectedRb: {fileID: 0}
-  spriteRenderer: {fileID: 0}
   faceRight: 0
-  RespawnPoint: {x: 30.09779, y: -30.411072}
+  RespawnPoint: {x: 0, y: 0}
   doorAhead: 0
   BS: {fileID: 0}
-  gravityScaler: 5
-  maxSpeed: 15
-  maxAcceleration: 40
-  maxAirAcceleration: 40
+  gravityScaler: 2
+  maxSpeed: 10
+  maxAcceleration: 10
+  maxAirAcceleration: 1
   velocity: {x: 0, y: 0}
-  desiredVelocity: {x: 0, y: 0}
-  connectionVelocity: {x: 0, y: 0}
-  jumpVelocity: {x: 0, y: 0}
-  jumpHeight: 6
+  jumpHeight: 2
   maxAirJumps: 0
   maxGroundAngle: 75
-  maxSnapSpeed: 10
-  probeDistance: 2
+  maxSnapSpeed: 100
+  probeDistance: 1
   probeMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 4294967295
   restrictGrip: 0
   isGriping: 0
   RestrictInputWhenDash: 0
   dashForce: 40
-  dashMaintainTime: 0.2
-  dashCoolDown: 0.8
+  dashMaintainTime: 0
+  dashCoolDown: 0
   maxAirDashes: 1
   isDashing: 0
+  minspeed: 1
+  steepTime: 0
   gameManager: {fileID: 0}

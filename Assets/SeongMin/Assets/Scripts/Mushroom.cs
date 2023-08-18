@@ -16,12 +16,7 @@ public class Mushroom : MonoBehaviour
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.color = new Color(1f, 1 - (force / 50), 0f);
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-
+        spriteRenderer.color = new Color(1f, 1f - (force / 50), 0f);
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -29,8 +24,8 @@ public class Mushroom : MonoBehaviour
         if (touchedRigidbody != null)
         {
             touchedRigidbody.velocity += new Vector2(0f, force);
+            boing.Play();
+            touchedRigidbody = null;
         }
-
-        boing.Play();
     }
 }

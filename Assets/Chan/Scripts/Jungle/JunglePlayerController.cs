@@ -5,6 +5,7 @@ using UnityEngine.Serialization;
 
 public class JunglePlayerController : MonoBehaviour
 {
+[Header("Characters")]
     [SerializeField]
     private GameObject human;
     [SerializeField]
@@ -13,6 +14,7 @@ public class JunglePlayerController : MonoBehaviour
     private GameObject rhino;
     [SerializeField]
     private GameObject gorilla;
+
     [SerializeField]
     private GameObject finalEnemy;
 
@@ -20,12 +22,15 @@ public class JunglePlayerController : MonoBehaviour
     private GameObject endText;
 
 
+[Header("RigidBody")]
     [SerializeField]
-    private Rigidbody2D rb, connectedRb, previousConnectedRb;
+    private Rigidbody2D rb;
+
+    private Rigidbody2D connectedRb, previousConnectedRb;
 
     //[SerializeField]
     //private HingeJoint2D hj;
-    
+
     [SerializeField]
     private bool faceRight;
 
@@ -56,12 +61,14 @@ public class JunglePlayerController : MonoBehaviour
     private Vector2 connectionWorldPosition;
     
 [Header("Jump")]
-    [SerializeField, Range(0f, 10f)]
+    [SerializeField, Range(0f, 20f)]
     private float jumpHeight = 2f;
 
     [SerializeField, Range(0, 5)]
     int maxAirJumps = 0;
-    
+    [SerializeField, Range(1f, 2f)]
+    float wallJumpMagnification = 1.2f;
+
     bool desiredJump;
     int jumpPhase;
 
@@ -138,10 +145,24 @@ public class JunglePlayerController : MonoBehaviour
 
     bool isUnlockDash = false;
 
+ [Header("Steep")]
+
+    //벽에 붙었을때 미끄러지는 속도
+    [SerializeField, Range(-10f, 0f)]
+    private float minspeed;
+
+    //벽에 붙었을때 미끄러지는 속도에 다다르기까지 걸리는 시간
+    [SerializeField, Range(0f, 3f)]
+    private float steepTime;
+
+    private float wallEruptedTime = 0f;
+
+[Header("GameManager")]
     [SerializeField]
     private JungleGameManager gameManager;
     private Transform targetPosition;
     private int fromTo;
+
 
     void OnValidate()
     {
@@ -263,8 +284,18 @@ public class JunglePlayerController : MonoBehaviour
             faceRight = true;
         }
 
+        if (OnSteep && isUnlockWallJump)
+        {
+            Steep();
+        }
         rb.velocity = velocity;
         ClearState();
+    }
+
+    private void Steep()
+    {
+        wallEruptedTime += Time.deltaTime;
+        velocity = new Vector2(velocity.x, Mathf.Lerp(velocity.y, minspeed - 1, Mathf.Clamp01(wallEruptedTime / steepTime)));//벽에 붙으면 천천히 아래로 미끄러지다 멈춤 -1()
     }
 
     IEnumerator ChangeScene()
@@ -334,9 +365,11 @@ public class JunglePlayerController : MonoBehaviour
             return;
         }
 
+        wallEruptedTime = 0f;//점프 키를 누를 때 마다 벽에 붙어있던 시간을 초기화 시킴
+
         stepsSinceLastJump = 0;
         jumpPhase += 1;
-        float jumpSpeed = Mathf.Sqrt(2f * -Physics2D.gravity.y * gravityScaler * jumpHeight);
+        float jumpSpeed = Mathf.Sqrt(2f * -Physics2D.gravity.y * gravityScaler * jumpHeight * ((OnSteep && isUnlockWallJump) ? wallJumpMagnification : 1f));
         jumpDirection = (jumpDirection + Vector2.up).normalized;
         /*
         float alignedSpeed = Vector2.Dot(velocity, jumpDirection);
@@ -438,6 +471,7 @@ public class JunglePlayerController : MonoBehaviour
 
     IEnumerator DashCoroutine()
     {
+        Vector2 initialVelocity = velocity;
         RestrictInputWhenDash = true;
         canDash = false;
         isDashing = true;
@@ -457,7 +491,7 @@ public class JunglePlayerController : MonoBehaviour
         yield return new WaitForSeconds(dashMaintainTime);
         RestrictInputWhenDash = false;
         isDashing = false;
-        rb.velocity = Vector2.zero;
+        rb.velocity = new Vector2(initialVelocity.x, 0f);
         ToggleGravity(true);
         yield return new WaitForSeconds(dashCoolDown - dashMaintainTime);
         canDash = true;
