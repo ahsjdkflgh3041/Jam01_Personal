@@ -17,6 +17,7 @@ TagManager:
   - Shaman
   - MonkeyPowerUp
   - End
+  - Mushroom
   layers:
   - Default
   - TransparentFX

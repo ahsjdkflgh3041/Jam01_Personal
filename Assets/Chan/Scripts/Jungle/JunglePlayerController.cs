@@ -31,8 +31,7 @@ public class JunglePlayerController : MonoBehaviour
     //[SerializeField]
     //private HingeJoint2D hj;
 
-    [SerializeField]
-    private bool faceRight;
+   public bool faceRight;
 
     Vector2 playerInput;
     public Vector2 RespawnPoint;
@@ -40,7 +39,8 @@ public class JunglePlayerController : MonoBehaviour
     [SerializeField]
     private int doorAhead = 0;
 
-    [SerializeField] private RectTransform BS;
+    [SerializeField]
+    private RectTransform BS;
     private bool desiredSceneChange;
     private bool onDoor;
     
@@ -73,6 +73,8 @@ public class JunglePlayerController : MonoBehaviour
     int jumpPhase;
 
     bool isUnlockWallJump = false;
+
+    private bool isCollidedMushRoom = false;
     
 [Header("Snap")]
     [SerializeField, Range(0f, 90f)]
@@ -155,7 +157,7 @@ public class JunglePlayerController : MonoBehaviour
     [SerializeField, Range(0f, 3f)]
     private float steepTime;
 
-    private float wallEruptedTime = 0f;
+    private float wallElapsedTime = 0f;
 
 [Header("GameManager")]
     [SerializeField]
@@ -294,8 +296,8 @@ public class JunglePlayerController : MonoBehaviour
 
     private void Steep()
     {
-        wallEruptedTime += Time.deltaTime;
-        velocity = new Vector2(velocity.x, Mathf.Lerp(velocity.y, minspeed - 1, Mathf.Clamp01(wallEruptedTime / steepTime)));//벽에 붙으면 천천히 아래로 미끄러지다 멈춤 -1()
+        wallElapsedTime += Time.deltaTime;
+        velocity = new Vector2(velocity.x, Mathf.Lerp(velocity.y, minspeed - 1, Mathf.Clamp01(wallElapsedTime / steepTime)));//벽에 붙으면 천천히 아래로 미끄러지다 멈춤 -1()
     }
 
     IEnumerator ChangeScene()
@@ -330,6 +332,9 @@ public class JunglePlayerController : MonoBehaviour
 
     void Jump()
     {
+        if (isCollidedMushRoom)
+            return;
+
         Vector2 jumpDirection;
         if (OnGround)
         {
@@ -365,7 +370,7 @@ public class JunglePlayerController : MonoBehaviour
             return;
         }
 
-        wallEruptedTime = 0f;//점프 키를 누를 때 마다 벽에 붙어있던 시간을 초기화 시킴
+        wallElapsedTime = 0f;//점프 키를 누를 때 마다 벽에 붙어있던 시간을 초기화 시킴
 
         stepsSinceLastJump = 0;
         jumpPhase += 1;
@@ -479,14 +484,7 @@ public class JunglePlayerController : MonoBehaviour
         ToggleGravity(false);
         
         // 인풋이 없는 경우, 바라보는 방향으로 대쉬
-        if (playerInput == Vector2.zero)
-        {
-            velocity = new Vector2(faceRight ? 1f : -1f, 0f).normalized * dashForce;
-        }
-        else
-        {
-            velocity = playerInput.normalized * dashForce;
-        }
+        velocity = new Vector2(faceRight ? 1f : -1f, 0f).normalized * dashForce;
 
         yield return new WaitForSeconds(dashMaintainTime);
         RestrictInputWhenDash = false;
@@ -532,6 +530,14 @@ public class JunglePlayerController : MonoBehaviour
     void OnCollisionStay2D(Collision2D collision)
     {
         EvaluateCollision(collision);
+
+        if (OnSteep && isUnlockWallJump)
+        {
+            if (collision.rigidbody != null)
+            {
+                velocity += collision.rigidbody.velocity;
+            }
+        }
     }
 
     void EvaluateCollision(Collision2D collision)
@@ -555,13 +561,9 @@ public class JunglePlayerController : MonoBehaviour
             Respawn();
         }
         // 오브젝트 관련
-        if (collision.gameObject.CompareTag("Crash"))
+        if (collision.gameObject.CompareTag("Mushroom"))
         {
-            if (isDashing)
-            {
-                //TODO: Restart시 오브젝트 복구 원할 시 리스트에 담아야함
-                collision.gameObject.SetActive(false);
-            }
+            isCollidedMushRoom = true;
         }
         
         for (int i = 0; i < collision.contactCount; i++)
@@ -591,6 +593,10 @@ public class JunglePlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("MovingPlatform"))
         {
             transform.SetParent(null);
+        }
+        if (collision.gameObject.CompareTag("Mushroom"))
+        {
+            isCollidedMushRoom = false;
         }
     }
 

@@ -13,19 +13,37 @@ public class Mushroom : MonoBehaviour
     [SerializeField]
     private AudioSource boing;
 
+    private bool hasCollided = false;
+
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.color = new Color(1f, 1f - (force / 50), 0f);
     }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        touchedRigidbody = collision.gameObject.GetComponent<Rigidbody2D>();
-        if (touchedRigidbody != null)
+        if (hasCollided)
+            return;
+
+        if (collision.gameObject.CompareTag("Player"))
         {
-            touchedRigidbody.velocity += new Vector2(0f, force);
-            boing.Play();
-            touchedRigidbody = null;
+            Rigidbody2D touchedRigidbody = collision.gameObject.GetComponent<Rigidbody2D>();
+            if (touchedRigidbody != null)
+            {
+                touchedRigidbody.velocity = new Vector2(0f, force);
+                boing.Play();
+            }
+        }
+
+        hasCollided = true;
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            hasCollided = false;
         }
     }
 }
