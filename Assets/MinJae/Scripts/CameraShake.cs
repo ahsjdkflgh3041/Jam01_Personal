@@ -16,7 +16,7 @@ public class CameraShake : MonoBehaviour
 
     private void OnEnable()
     {
-        initialPosition = transform.localPosition;
+        initialPosition = transform.position;
         JungleCamera = GetComponent<JungleCamera>();
     }
 
@@ -29,13 +29,13 @@ public class CameraShake : MonoBehaviour
     {
         if (currentShakeDuration > 0)
         {
-            transform.localPosition = initialPosition + Random.insideUnitSphere * shakeMagnitude;
+            transform.position = initialPosition + Random.insideUnitSphere * shakeMagnitude;
             currentShakeDuration -= Time.deltaTime * dampingSpeed;
         }
         else
         {
             currentShakeDuration = 0f;
-            transform.localPosition = initialPosition;
+            transform.position = initialPosition;
             JungleCamera.enabled = true;
         }
     }

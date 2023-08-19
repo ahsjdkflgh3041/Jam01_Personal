@@ -45,6 +45,7 @@ public class DialogueManager : MonoBehaviour
     {
         if( !dialogueWindow.activeSelf ){
             dialogueWindow.SetActive(true);
+            Time.timeScale = 0f;
         }
     }
 
@@ -52,6 +53,7 @@ public class DialogueManager : MonoBehaviour
     {
         if( dialogueWindow.activeSelf ){
             dialogueWindow.SetActive(false);
+            Time.timeScale = 1f;
         }
     }
 

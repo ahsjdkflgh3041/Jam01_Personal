@@ -60,10 +60,11 @@
             "lineTimeout" : 0
         },
         {
-            "eventPoint": "2_1clear",
+            "eventPoint": "2_1clear2",
             "characterName": " ",
             "dialogueText": "이상한 소리가 들려옵니다...",
-            "lineTimeout" : 3
+          "lineTimeout": 0
+            "Shaking": true
         },
 
         {

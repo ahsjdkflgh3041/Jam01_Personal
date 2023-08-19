@@ -482,10 +482,17 @@ public class JunglePlayerController : MonoBehaviour
         isDashing = true;
         // 대쉬 중에는 중력의 영향을 받지 않음
         ToggleGravity(false);
-        
-        // 인풋이 없는 경우, 바라보는 방향으로 대쉬
-        velocity = new Vector2(faceRight ? 1f : -1f, 0f).normalized * dashForce;
 
+        if (OnSteep)
+        {
+            velocity = new Vector2(faceRight ? -1f : 1f, 0f).normalized * dashForce;
+        }
+        else
+        {
+            // 바라보는 방향으로 대쉬
+            velocity = new Vector2(faceRight ? 1f : -1f, 0f).normalized * dashForce;
+        }
+          
         yield return new WaitForSeconds(dashMaintainTime);
         RestrictInputWhenDash = false;
         isDashing = false;
@@ -662,6 +669,7 @@ public class JunglePlayerController : MonoBehaviour
             //TODO: 2스테이지 보스 소환 -> 게임 메니저
             //TODO: 능력 해금 -> bool or Level 조절
             gameManager.PlayDialogue(21);
+            gameManager.PlayDialogue(212);
             gameManager.ActiveBoss();
             //finalEnemy.SetActive(true);
             ActiveDash();
