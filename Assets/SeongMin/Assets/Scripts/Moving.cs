@@ -1,14 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Quaternion = System.Numerics.Quaternion;
 
-public class Moving : MonoBehaviour
+public class Moving : MonoBehaviour, IResetable
 {
     [SerializeField]
     private Transform[] points;
     [SerializeField]
     private bool isLoop;
+    [SerializeField]
+    private bool movingOnTouch;
+    [SerializeField]
+    private bool moving;
 
     int index = 0;
 
@@ -19,31 +20,44 @@ public class Moving : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        moving = !movingOnTouch;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        passedTime += Time.deltaTime;
-        float t = Mathf.Clamp01(passedTime / movingTime);
-
-        transform.position = Vector2.Lerp(points[index % points.Length].position, points[(index + 1) % points.Length].position, t);
-
-        if (t >= 1)
+        if (moving)
         {
-            if (isLoop)
+            passedTime += Time.deltaTime;
+            float t = Mathf.Clamp01(passedTime / movingTime);
+
+            transform.position = Vector2.Lerp(points[index % points.Length].position, points[(index + 1) % points.Length].position, t);
+
+            if (t >= 1)
             {
-                passedTime = 0;
-                index++;
+                if (isLoop)
+                {
+                    passedTime = 0f;
+                    index++;
+                }
             }
         }
     }
 
-    public void ResetPosition()
+    public void Reset()
     {
-        passedTime = 0;
+        Debug.Log(gameObject.name + "Position Reset!");
+        moving = !movingOnTouch;
         index = 0;
+        passedTime = 0f;
         transform.position = points[0].position;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (movingOnTouch && collision.gameObject.CompareTag("Player"))
+        {
+            moving = true;
+        }
     }
 }

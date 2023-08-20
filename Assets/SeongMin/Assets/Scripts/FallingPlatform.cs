@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FallingPlatform : MonoBehaviour
+public class FallingPlatform : MonoBehaviour, IResetable
 {
     private Rigidbody2D platformRigidbody;
     private Vector2 initialPosition;

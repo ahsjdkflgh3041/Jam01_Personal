@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SitMoving : MonoBehaviour
+public class SitMoving : MonoBehaviour, IResetable
 {
     private Moving moving;
 
@@ -21,7 +21,7 @@ public class SitMoving : MonoBehaviour
         }
     }
 
-    public void ResetPosition()
+    public void Reset()
     {
         moving.enabled = false;
     }

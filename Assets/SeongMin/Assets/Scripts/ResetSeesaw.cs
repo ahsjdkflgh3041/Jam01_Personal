@@ -2,18 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ResetSeesaw : MonoBehaviour
+public class ResetSeesaw : MonoBehaviour, IResetable
 {
-    private Vector2 initialPosition;
 
     private void Start()
     {
-        initialPosition = transform.position;
     }
 
-    public void ResetPosition()
+    public void Reset()
     {
-        transform.position = initialPosition;
+        Debug.Log("Seesaw");
         transform.eulerAngles = Vector3.zero;
+
+        Moving moving = GetComponent<Moving>();
+        moving.Reset();
     }
 }

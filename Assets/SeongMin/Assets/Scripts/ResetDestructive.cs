@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ResetDestructive : MonoBehaviour
+public class ResetDestructive : MonoBehaviour, IResetable
 {
     [SerializeField]
     private GameObject destructiveObj;

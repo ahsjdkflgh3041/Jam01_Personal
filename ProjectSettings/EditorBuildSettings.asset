@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Chan/Scenes/Title.unity
     guid: b438e7f95f941a447bcc6a32c6e7e022
   - enabled: 1
-    path: Assets/MinJae/Scene/TitleScene.unity
+    path: Assets/MinJae/Fonts/Scene/TitleScene.unity
     guid: 1ce719bc5b994c34c9457a178912c820
   - enabled: 1
     path: Assets/Chan/Scenes/LobbyScene 1.unity

@@ -52,34 +52,10 @@ public class JungleGameManager : MonoBehaviour
     {
         foreach (var obj in resetObjects)
         {
-            var ResetDestructive = obj.GetComponent<ResetDestructive>();
-            if (ResetDestructive != null)
+            var resetTarget = obj.GetComponent<IResetable>();
+            if (resetTarget != null)
             {
-                ResetDestructive.Reset();
-            }
-            
-            var Fallingplatform = obj.GetComponent<FallingPlatform>();
-            if (Fallingplatform != null)
-            {
-                Fallingplatform.Reset();
-            }
-
-            var Movingplatform = obj.GetComponent<Moving>();
-            if (Movingplatform != null)
-            {
-                Movingplatform.ResetPosition();
-            }
-
-            var SitMoving = obj.GetComponent<SitMoving>();
-            if (SitMoving != null)
-            {
-                SitMoving.ResetPosition();
-            }
-
-            var ResetSeesaw = obj.GetComponent<ResetSeesaw>();
-            if (ResetSeesaw != null)
-            {
-                ResetSeesaw.ResetPosition();
+                resetTarget.Reset();
             }
         }
     }

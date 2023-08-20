@@ -1954,6 +1954,7 @@ MonoBehaviour:
   - {fileID: 2553111063965453625}
   - {fileID: 2553111063560159925}
   isLoop: 1
+  movingOnTouch: 0
   movingTime: 2
 --- !u!1 &2553111062734697473
 GameObject:
@@ -2598,6 +2599,7 @@ MonoBehaviour:
   - {fileID: 2553111063142888747}
   - {fileID: 2553111063814121928}
   isLoop: 1
+  movingOnTouch: 0
   movingTime: 2
 --- !u!1 &2553111062926177984
 GameObject:
@@ -3360,6 +3362,7 @@ MonoBehaviour:
   - {fileID: 2553111064036767517}
   - {fileID: 2553111063286605688}
   isLoop: 1
+  movingOnTouch: 0
   movingTime: 1
 --- !u!1 &2553111063112707930
 GameObject:
@@ -3810,7 +3813,6 @@ GameObject:
   - component: {fileID: 2553111063220148365}
   - component: {fileID: 2553111063220148366}
   - component: {fileID: 2553111063220148362}
-  - component: {fileID: 2553111063220148363}
   m_Layer: 6
   m_Name: Ground (27)
   m_TagString: MovingPlatform
@@ -3918,7 +3920,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2553111063220148367}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8b3a52dc22e2bea4787faa822452adbd, type: 3}
   m_Name: 
@@ -3927,19 +3929,8 @@ MonoBehaviour:
   - {fileID: 2553111063272276409}
   - {fileID: 2553111063887890702}
   isLoop: 0
+  movingOnTouch: 1
   movingTime: 5
---- !u!114 &2553111063220148363
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2553111063220148367}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 515328d8872671341a1b48d6ed122c2e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2553111063223107247
 GameObject:
   m_ObjectHideFlags: 0
@@ -4920,6 +4911,7 @@ MonoBehaviour:
   - {fileID: 2553111063777321815}
   - {fileID: 2553111063931202893}
   isLoop: 1
+  movingOnTouch: 0
   movingTime: 2
 --- !u!1 &2553111063305133545
 GameObject:
@@ -7224,6 +7216,7 @@ MonoBehaviour:
   - {fileID: 2553111063424652973}
   - {fileID: 2553111063112707929}
   isLoop: 0
+  movingOnTouch: 0
   movingTime: 45
 --- !u!1 &2553111063740070682
 GameObject:
@@ -7543,6 +7536,7 @@ MonoBehaviour:
   - {fileID: 2553111063631831372}
   - {fileID: 2553111063223107246}
   isLoop: 1
+  movingOnTouch: 0
   movingTime: 2
 --- !u!1 &2553111063814121929
 GameObject:
@@ -8390,6 +8384,7 @@ MonoBehaviour:
   - {fileID: 2553111064071394197}
   - {fileID: 2553111063309534164}
   isLoop: 1
+  movingOnTouch: 0
   movingTime: 2
 --- !u!1 &2553111063941416438
 GameObject:
@@ -10080,6 +10075,7 @@ MonoBehaviour:
   - {fileID: 2553111062794557476}
   - {fileID: 2553111063905253475}
   isLoop: 1
+  movingOnTouch: 0
   movingTime: 2
 --- !u!1 &2553111064318938891
 GameObject:
@@ -10464,6 +10460,7 @@ MonoBehaviour:
   - {fileID: 2553111063402409533}
   - {fileID: 2553111064318938890}
   isLoop: 1
+  movingOnTouch: 0
   movingTime: 1
 --- !u!1 &2553111064365518676
 GameObject:
@@ -11656,6 +11653,7 @@ MonoBehaviour:
   - {fileID: 2553111063955927688}
   - {fileID: 2553111062700068219}
   isLoop: 1
+  movingOnTouch: 0
   movingTime: 2
 --- !u!1 &2553111064570558171
 GameObject:
@@ -11900,6 +11898,7 @@ MonoBehaviour:
   - {fileID: 2553111064451684271}
   - {fileID: 2553111064365518675}
   isLoop: 1
+  movingOnTouch: 0
   movingTime: 2
 --- !u!1 &2553111064581478506
 GameObject:
