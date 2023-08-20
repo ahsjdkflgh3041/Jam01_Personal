@@ -286,7 +286,7 @@ public class JunglePlayerController : MonoBehaviour
             faceRight = true;
         }
 
-        if (OnSteep && isUnlockWallJump)
+        if (OnSteep && isUnlockWallJump && playerInput.x != 0)
         {
             Steep();
         }
@@ -340,7 +340,7 @@ public class JunglePlayerController : MonoBehaviour
         {
             jumpDirection = contactNormal;
         }
-        else if (OnSteep && isUnlockWallJump)
+        else if (OnSteep && isUnlockWallJump && playerInput.x != 0)
         {
             jumpDirection = steepNormal;
             jumpPhase = 0;
