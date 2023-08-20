@@ -8,6 +8,8 @@ public class Mushroom : MonoBehaviour
     private float force = 25f;
     private Rigidbody2D touchedRigidbody;
 
+    private float rotation;
+
     private SpriteRenderer spriteRenderer;
 
     [SerializeField]
@@ -19,6 +21,7 @@ public class Mushroom : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.color = new Color(1f, 1f - (force / 50), 0f);
+        rotation = transform.eulerAngles.z;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -31,7 +34,8 @@ public class Mushroom : MonoBehaviour
             Rigidbody2D touchedRigidbody = collision.gameObject.GetComponent<Rigidbody2D>();
             if (touchedRigidbody != null)
             {
-                touchedRigidbody.velocity = new Vector2(0f, force);
+                float angleToRad = (rotation + 90) * Mathf.Deg2Rad;
+                touchedRigidbody.AddForce(new Vector2(Mathf.Cos(angleToRad), Mathf.Sin(angleToRad)) * force, ForceMode2D.Impulse);
                 boing.Play();
             }
         }

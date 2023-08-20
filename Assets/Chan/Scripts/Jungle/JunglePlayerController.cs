@@ -353,9 +353,10 @@ public class JunglePlayerController : MonoBehaviour
 
     private void Respawn()
     {
+        ExitGrip();
         transform.position = RespawnPoint;
         gameManager.Respawn();
-        rb.velocity = Vector2.zero;
+        velocity = Vector2.zero;
     }
 
     void Jump()
@@ -364,7 +365,12 @@ public class JunglePlayerController : MonoBehaviour
             return;
 
         Vector2 jumpDirection;
-        if (OnGround)
+        if (isGriping)
+        {
+            ExitGrip();
+            jumpDirection = new Vector2(playerInput.x, 0) + Vector2.up;
+        }
+        else if (OnGround)
         {
             jumpDirection = contactNormal;
         }
@@ -381,11 +387,6 @@ public class JunglePlayerController : MonoBehaviour
                 jumpPhase = 1;
             }
             jumpDirection = contactNormal;
-        }
-        else if (isGriping)
-        {
-            ExitGrip();
-            jumpDirection = new Vector2(playerInput.x, 0) + Vector2.up;
         }
         /*
         else if (isGripingRope)
@@ -443,6 +444,7 @@ public class JunglePlayerController : MonoBehaviour
     {
         transform.SetParent(null);
         isGriping = false;
+        OnGripable = false;
         ToggleGravity(true);
     }
     /*
