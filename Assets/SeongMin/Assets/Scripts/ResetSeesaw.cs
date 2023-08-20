@@ -15,6 +15,7 @@ public class ResetSeesaw : MonoBehaviour, IResetable
         transform.eulerAngles = Vector3.zero;
 
         Moving moving = GetComponent<Moving>();
-        moving.Reset();
+        if(moving != null)
+            moving.Reset();
     }
 }

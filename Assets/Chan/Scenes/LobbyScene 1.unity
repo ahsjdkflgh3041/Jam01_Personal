@@ -1159,8 +1159,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 349362088}
-  - component: {fileID: 349362089}
   - component: {fileID: 349362090}
+  - component: {fileID: 349362089}
   m_Layer: 0
   m_Name: HeadPosition
   m_TagString: Untagged
@@ -1196,8 +1196,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 559649822}
---- !u!70 &349362090
-CapsuleCollider2D:
+--- !u!58 &349362090
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1206,12 +1206,12 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 1.97, y: 1.37}
-  m_Size: {x: 5.92, y: 9.48}
-  m_Direction: 0
+  m_Offset: {x: 3.73, y: 1.11}
+  serializedVersion: 2
+  m_Radius: 6.94
 --- !u!1 &545272523
 GameObject:
   m_ObjectHideFlags: 0
@@ -1395,7 +1395,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2434734166447286006, guid: ca88e48d1ff2d404da72f1c94b465abd, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2434734166554929853, guid: ca88e48d1ff2d404da72f1c94b465abd, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1451,11 +1451,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4145446114595094029, guid: ca88e48d1ff2d404da72f1c94b465abd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1053
+      value: -9.2
       objectReference: {fileID: 0}
     - target: {fileID: 4145446114595094029, guid: ca88e48d1ff2d404da72f1c94b465abd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 31
+      value: -2.9
       objectReference: {fileID: 0}
     - target: {fileID: 4145446114595094029, guid: ca88e48d1ff2d404da72f1c94b465abd, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2079,7 +2079,8 @@ PrefabInstance:
       propertyPath: movingOnTouch
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 389623493563227717, guid: f3e752e1a125c07488f1490d8ba89d30, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f3e752e1a125c07488f1490d8ba89d30, type: 3}
 --- !u!1 &844958283
 GameObject:
