@@ -13,6 +13,7 @@ public class GameManager : Singleton_mj<GameManager>
 
     int doorEntered = 0;
 
+
     void Start()
     {
         dialogueMan.LoadSrc(); 
@@ -23,6 +24,7 @@ public class GameManager : Singleton_mj<GameManager>
         // Camera Shaking
         if ( Input.GetKeyDown( KeyCode.S ) )
         {
+            Debug.Log("Shake");
             CameraShake cameraShake = Camera.main.GetComponent<CameraShake>();
             if (cameraShake != null)
             {

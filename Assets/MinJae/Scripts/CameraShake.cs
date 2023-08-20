@@ -16,12 +16,13 @@ public class CameraShake : MonoBehaviour
 
     private void OnEnable()
     {
-        initialPosition = transform.position;
         JungleCamera = GetComponent<JungleCamera>();
     }
 
     public void TriggerShake()
     {
+        initialPosition = transform.position;
+        JungleCamera.enabled = false;
         currentShakeDuration = shakeDuration;
     }
 

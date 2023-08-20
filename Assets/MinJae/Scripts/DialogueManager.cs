@@ -26,6 +26,8 @@ public class DialogueManager : MonoBehaviour
     List<string>     diaCompleted;
     bool playing = false;
 
+    public CameraShake CameraShake;
+
 
     void Start()
     {
@@ -82,6 +84,15 @@ public class DialogueManager : MonoBehaviour
             talkerTxt.text  = dialogue.characterName;
             contentTxt.text = dialogue.dialogueText;
 
+            switch (dialogue.Option)
+            {
+                case "Shaking":
+                    {
+                        CameraShake.TriggerShake();
+                        break;
+                    }
+            }
+
 
             // TODO: key restrict = true;
             if( dialogue.lineTimeout == 0 )
@@ -128,6 +139,7 @@ public class Dialogue
     public string characterName;
     public string dialogueText;
     public float  lineTimeout;
+    public string Option;
 }
 
 [System.Serializable]

@@ -669,7 +669,6 @@ public class JunglePlayerController : MonoBehaviour
             //TODO: 2스테이지 보스 소환 -> 게임 메니저
             //TODO: 능력 해금 -> bool or Level 조절
             gameManager.PlayDialogue(21);
-            gameManager.PlayDialogue(212);
             gameManager.ActiveBoss();
             //finalEnemy.SetActive(true);
             ActiveDash();

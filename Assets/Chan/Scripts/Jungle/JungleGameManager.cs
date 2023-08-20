@@ -37,15 +37,6 @@ public class JungleGameManager : MonoBehaviour
             case 21:
                 dialogueMan?.PlayDialogue("2_1clear");
                 break;
-            case 212:
-                if (CameraShake != null)
-                {
-                    JungleCamera.enabled = false;
-                    CameraShake.TriggerShake();
-                }
-                dialogueMan?.PlayDialogue("2_1clear2");
-                break;
-
             case 22:
                 dialogueMan?.PlayDialogue("2_2clear");
                 break;
