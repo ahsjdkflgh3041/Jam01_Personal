@@ -563,6 +563,10 @@ public class JunglePlayerController : MonoBehaviour
                 Respawn();
             }
         }
+        if(collision.gameObject.CompareTag("DeadZone"))
+        {
+            Respawn();
+        }
         if (collision.gameObject.CompareTag("Niddle"))
         {
             Respawn();
@@ -688,9 +692,12 @@ public class JunglePlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Door"))
         {
             var door = collision.gameObject.GetComponent<JungleDoor>();
-            targetPosition = door.targetPosition;
-            fromTo = door.fromTo;
-            onDoor = true;
+            if (door.isActive)
+            {
+                targetPosition = door.targetPosition;
+                fromTo = door.fromTo;
+                onDoor = true;
+            }
         }
     }
 

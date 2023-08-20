@@ -32,7 +32,7 @@
     {
       "eventPoint": "1_1clear",
       "characterName": "원숭이의 민첩함",
-      "dialogueText": "벽에서 space 키를 누름으로써 벽에서 점프할수 있습니다\n덩쿨에서 화살표 위 키를 누름으로써 덩쿨을 탈 수 있습니다",
+      "dialogueText": "벽 쪽 방향키를 꾹 누르면 벽을 탈 수 있습니다\n벽을 타고 있는 상태에서 space 키를 누름으로써 벽에서 점프할수 있습니다\n덩쿨에서 화살표 위 키를 누름으로써 덩쿨을 탈 수 있습니다",
       "lineTimeout": 0,
       "Option": "None"
     },

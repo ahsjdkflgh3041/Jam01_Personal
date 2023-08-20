@@ -1,15 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 public class JungleGameManager : MonoBehaviour
 {
-
     public DialogueManager dialogueMan;
 
     public List<GameObject> doors = new List<GameObject>();
     public List<GameObject> resetObjects = new List<GameObject>();
+
+    public List<GameObject> collectionGameObject = new List<GameObject>();
 
     public JungleCamera JungleCamera;
 
@@ -19,9 +20,40 @@ public class JungleGameManager : MonoBehaviour
 
     int doorEntered = 0;
 
+    public Collection[] collections = new Collection[4];
+
+    [SerializeField]
+    private SignControl signController;
+
+    [SerializeField]
+    private JungleDoor hiddenDoor;
+
     void Start()
     {
-        dialogueMan.LoadSrc(); 
+        dialogueMan.LoadSrc();
+        SetCollections();
+        hiddenDoor.isActive = false;
+    }
+
+    private void SetCollections()
+    {
+        for (int i = 0; i < collections.Length; i++)
+        {
+            collections[i] = new Collection();
+            collections[i].collectionObj = collectionGameObject[i];
+        }
+    }
+
+    private bool CheckCollection()
+    {
+        foreach (Collection collection in collections)
+        {
+            if (!collection.isCollected)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 
     public void PlayDialogue(int index)
@@ -86,4 +118,18 @@ public class JungleGameManager : MonoBehaviour
                 break;
         }  
     }
+
+    public void AddCollection(int num)
+    {
+        collections[num].isCollected = true;
+        collections[num].collectionObj.SetActive(true);
+        signController.SetSign(num);
+        hiddenDoor.isActive = CheckCollection();
+    }
+}
+
+public class Collection
+{
+    public bool isCollected = false;
+    public GameObject collectionObj;
 }
