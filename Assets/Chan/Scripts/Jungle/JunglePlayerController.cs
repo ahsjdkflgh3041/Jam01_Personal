@@ -1,19 +1,14 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 public class JunglePlayerController : MonoBehaviour
 {
-[Header("Characters")]
+    [Header("Characters")]
     [SerializeField]
-    private GameObject human;
-    [SerializeField]
-    private GameObject monkey;
-    [SerializeField]
-    private GameObject rhino;
-    [SerializeField]
-    private GameObject gorilla;
+    private List<GameObject> playerModels;
 
     [SerializeField]
     private GameObject finalEnemy;
@@ -21,8 +16,33 @@ public class JunglePlayerController : MonoBehaviour
     [SerializeField]
     private GameObject endText;
 
+    //0 사람 1 원숭이 2 코뿔소 3 고릴라
+    private int _characterLevel;
+    private int characterLevel
+    {
+        get
+        {
+            return _characterLevel;
+        }
+        set
+        {
+            for (int i = 0; i < playerModels.Count; i++)
+            {
+                if (i == value)
+                {
+                    playerModels[i].SetActive(true);
+                }
+                else
+                {
+                    playerModels[i].SetActive(false);
+                }
+            }
+            _characterLevel = value;
+        }
+    }
 
-[Header("RigidBody")]
+
+    [Header("RigidBody")]
     [SerializeField]
     private Rigidbody2D rb;
 
@@ -72,7 +92,6 @@ public class JunglePlayerController : MonoBehaviour
     bool desiredJump;
     int jumpPhase;
 
-    bool isUnlockWallJump = false;
 
     private bool isCollidedMushRoom = false;
     
@@ -114,7 +133,6 @@ public class JunglePlayerController : MonoBehaviour
     // 줄타기 트리거 위에 있는지 여부
     private bool OnGripable = false;
 
-    private bool isUnlockGrab = false;
     /*
 [Header("Rope")]
     private Transform gripableRopeTransform;
@@ -144,8 +162,6 @@ public class JunglePlayerController : MonoBehaviour
     private bool canDash = true;
     public bool isDashing = false;
     private int dashPhase;
-
-    bool isUnlockDash = false;
 
  [Header("Steep")]
 
@@ -185,7 +201,7 @@ public class JunglePlayerController : MonoBehaviour
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         //hj.enabled = false;
 
-        human.SetActive(true);
+        characterLevel = 0;
     }
 
     void Update()
@@ -229,6 +245,8 @@ public class JunglePlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        InputCheatKey();
+
         UpdateState();
 
         if (desiredJump)
@@ -237,7 +255,7 @@ public class JunglePlayerController : MonoBehaviour
             Jump();
         }
 
-        if (isUnlockGrab)
+        if (characterLevel >= 1)
         {
             if (desiredGrip)
             {
@@ -251,7 +269,7 @@ public class JunglePlayerController : MonoBehaviour
                 MovePosition();
             }
 
-            if (isUnlockDash)
+            if (characterLevel >= 2)
             {
                 if (desireDash)
                 {
@@ -286,7 +304,7 @@ public class JunglePlayerController : MonoBehaviour
             faceRight = true;
         }
 
-        if (OnSteep && isUnlockWallJump && playerInput.x != 0)
+        if (OnSteep && characterLevel > 1 && playerInput.x != 0)
         {
             Steep();
         }
@@ -294,11 +312,21 @@ public class JunglePlayerController : MonoBehaviour
         ClearState();
     }
 
+    private void InputCheatKey()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            characterLevel = 2;
+
+        }
+    }
+
     private void Steep()
     {
         wallElapsedTime += Time.deltaTime;
         velocity = new Vector2(velocity.x, Mathf.Lerp(velocity.y, minspeed - 1, Mathf.Clamp01(wallElapsedTime / steepTime)));//벽에 붙으면 천천히 아래로 미끄러지다 멈춤 -1()
     }
+
 
     IEnumerator ChangeScene()
     {
@@ -340,7 +368,7 @@ public class JunglePlayerController : MonoBehaviour
         {
             jumpDirection = contactNormal;
         }
-        else if (OnSteep && isUnlockWallJump && playerInput.x != 0)
+        else if (OnSteep && characterLevel >= 1 && playerInput.x != 0)
         {
             jumpDirection = steepNormal;
             jumpPhase = 0;
@@ -374,7 +402,7 @@ public class JunglePlayerController : MonoBehaviour
 
         stepsSinceLastJump = 0;
         jumpPhase += 1;
-        float jumpSpeed = Mathf.Sqrt(2f * -Physics2D.gravity.y * gravityScaler * jumpHeight * ((OnSteep && isUnlockWallJump) ? wallJumpMagnification : 1f));
+        float jumpSpeed = Mathf.Sqrt(2f * -Physics2D.gravity.y * gravityScaler * jumpHeight * ((OnSteep && characterLevel >= 1) ? wallJumpMagnification : 1f));
         jumpDirection = (jumpDirection + Vector2.up).normalized;
         /*
         float alignedSpeed = Vector2.Dot(velocity, jumpDirection);
@@ -513,7 +541,7 @@ public class JunglePlayerController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (gorilla.activeSelf)
+        if (characterLevel >= 3)
         {
             Time.timeScale = 0f;
             BS.gameObject.SetActive(true);
@@ -538,7 +566,7 @@ public class JunglePlayerController : MonoBehaviour
     {
         EvaluateCollision(collision);
 
-        if (OnSteep && isUnlockWallJump)
+        if (OnSteep && characterLevel >= 1)
         {
             if (collision.rigidbody != null)
             {
@@ -661,10 +689,7 @@ public class JunglePlayerController : MonoBehaviour
             //TODO: 능력 해금 -> bool or Level 조절
             //finalEnemy.SetActive(true);
             gameManager.PlayDialogue(11);
-            ActiveWallJump();
-            ActiveGrab();
-            human.SetActive(false);
-            monkey.SetActive(true);
+            characterLevel = 1;
         }
 
         if (collision.gameObject.CompareTag("DashPowerUp"))
@@ -675,17 +700,14 @@ public class JunglePlayerController : MonoBehaviour
             gameManager.PlayDialogue(21);
             gameManager.ActiveBoss();
             //finalEnemy.SetActive(true);
-            ActiveDash();
-            monkey.SetActive(false);
-            rhino.SetActive(true);
+            characterLevel = 2;
         }
 
         if (collision.gameObject.CompareTag("End"))
         {
             gameManager.PlayDialogue(3);
             //끝
-            rhino.SetActive(false);
-            gorilla.SetActive(true);
+            characterLevel = 3;
         }
 
         // 스테이지 이동 문
@@ -699,23 +721,6 @@ public class JunglePlayerController : MonoBehaviour
                 onDoor = true;
             }
         }
-    }
-
-
-
-    private void ActiveWallJump()
-    {
-        isUnlockWallJump = true;
-    }
-
-    private void ActiveGrab()
-    {
-        isUnlockGrab = true;
-    }
-
-    private void ActiveDash()
-    {
-        isUnlockDash = true;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
