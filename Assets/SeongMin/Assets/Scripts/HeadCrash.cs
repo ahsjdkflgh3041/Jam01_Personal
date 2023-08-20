@@ -7,8 +7,17 @@ public class HeadCrash : MonoBehaviour
     [SerializeField]
     private JunglePlayerController playerController;
 
+    private Collider2D chargeCollider;
+
+    private void Start()
+    {
+        chargeCollider = GetComponent<Collider2D>();
+    }
+
     private void FixedUpdate()
     {
+        chargeCollider.enabled = playerController.isDashing;
+
         transform.localScale = new Vector3(playerController.faceRight ? 1f : -1f, 1f, 1f);
     }
 
