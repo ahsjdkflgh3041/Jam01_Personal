@@ -17,6 +17,7 @@ public class CollectableObject : MonoBehaviour
         {
             gameManager.AddCollection(collectionNumber);
             gameObject.SetActive(false);
+            gameManager.PlayDialogue(0);
         }
     }
 }

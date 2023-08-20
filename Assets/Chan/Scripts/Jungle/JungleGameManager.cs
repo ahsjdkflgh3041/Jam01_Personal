@@ -75,6 +75,9 @@ public class JungleGameManager : MonoBehaviour
             case 3:
                 dialogueMan?.PlayDialogue("ending");
                 break;
+            case 0://보석 획득
+                dialogueMan?.PlayDialogue("getJewel");
+                break;
             default:
                 break;
         }

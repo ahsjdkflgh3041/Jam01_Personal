@@ -8,7 +8,7 @@ public class Moving : MonoBehaviour, IResetable
     private bool isLoop;
     [SerializeField]
     private bool movingOnTouch;
-    [SerializeField]
+
     private bool moving;
 
     int index = 0;

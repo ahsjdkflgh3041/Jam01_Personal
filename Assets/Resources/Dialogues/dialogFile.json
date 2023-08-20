@@ -90,6 +90,14 @@
       "dialogueText": "축하합니다! Jungle Ranger를 클리어 하였습니다!",
       "lineTimeout": 0,
       "Option": "None"
+    },
+
+    {
+      "eventPoint": "getJewel",
+      "characterName": "이상한 보석",
+      "dialogueText": "이상한 빛이 나는 보석입니다 어딘가 쓸 수 있는곳이 있을지도?",
+      "lineTimeout": 0,
+      "Option": "None"
     }
   ]
 }

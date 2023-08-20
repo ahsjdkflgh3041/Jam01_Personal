@@ -304,7 +304,7 @@ public class JunglePlayerController : MonoBehaviour
             faceRight = true;
         }
 
-        if (OnSteep && characterLevel > 1 && playerInput.x != 0)
+        if (OnSteep && characterLevel >= 1 && playerInput.x != 0)
         {
             Steep();
         }
@@ -506,7 +506,8 @@ public class JunglePlayerController : MonoBehaviour
 
     IEnumerator DashCoroutine()
     {
-        Vector2 initialVelocity = velocity;
+       
+        Vector2 initialVelocity = playerInput.x * velocity.x >= 0 ? velocity : Vector2.zero;
         RestrictInputWhenDash = true;
         canDash = false;
         isDashing = true;
