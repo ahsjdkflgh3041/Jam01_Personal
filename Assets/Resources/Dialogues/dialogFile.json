@@ -1,109 +1,95 @@
 {
-    "dialogues": [
-        {
-            "eventPoint": "start",
-            "characterName": "샤먼",
-            "dialogueText": "우리 부족에게 큰 위기가 생겼다...",
-            "lineTimeout" : 0,
-            "Option": "None"
-        },
-      {
-        "eventPoint": "start",
-        "characterName": "샤먼",
-        "dialogueText": "고대에 감춰져 있던 거대한 악, 괴수 마캄이 깨어났다...",
-        "lineTimeout": 0,
-        "Option": "None"
-      },
-      {
-        "eventPoint": "start",
-        "characterName": "샤먼",
-        "dialogueText": "괴수 마캄을 막기 위해선 원숭이의 민첩함, 코뿔소의 힘, 그리고 고릴라의 심장을 모아야 한다!",
-        "lineTimeout": 0,
-        "Option": "None"
-      },
-      {
-        "eventPoint": "start",
-        "characterName": "샤먼",
-        "dialogueText": "정글러 카프톤! 너가 우리 부족의 희망이다!",
-        "lineTimeout": 0,
-        "Option": "None"
-      },
+  "dialogues": [
+    {
+      "eventPoint": "start",
+      "characterName": "샤먼",
+      "dialogueText": "우리 부족에게 큰 위기가 생겼다...",
+      "lineTimeout": 0,
+      "Option": "None"
+    },
+    {
+      "eventPoint": "start",
+      "characterName": "샤먼",
+      "dialogueText": "고대에 감춰져 있던 거대한 악, 괴수 마캄이 깨어났다...",
+      "lineTimeout": 0,
+      "Option": "None"
+    },
+    {
+      "eventPoint": "start",
+      "characterName": "샤먼",
+      "dialogueText": "괴수 마캄을 막기 위해선 원숭이의 민첩함, 코뿔소의 힘, 그리고 고릴라의 심장을 모아야 한다!",
+      "lineTimeout": 0,
+      "Option": "None"
+    },
+    {
+      "eventPoint": "start",
+      "characterName": "샤먼",
+      "dialogueText": "정글러 카프톤! 너가 우리 부족의 희망이다!",
+      "lineTimeout": 0,
+      "Option": "None"
+    },
 
-      {
-        "eventPoint": "1_1clear",
-        "characterName": "원숭이의 민첩함",
-        "dialogueText": "벽에서 space 키를 누름으로써 벽에서 점프할수 있습니다\n덩쿨에서 화살표 위 키를 누름으로써 덩쿨을 탈 수 있습니다",
-        "lineTimeout": 0,
-        "Option": "None"
-      },
-
-
-      {
-        "eventPoint": "1_2clear",
-        "characterName": "샤먼",
-        "dialogueText": "잘했다 카프톤! 이제 코뿔소의 힘과 고릴라의 심장이 남았군",
-        "lineTimeout": 0,
-        "Option": "None"
-      },
-      {
-        "eventPoint": "1_2clear",
-        "characterName": "샤먼",
-        "dialogueText": "다만 괴수 마캄을 조심하도록!",
-        "lineTimeout": 0,
-        "Option": "None"
-      },
-      {
-        "eventPoint": "1_2clear",
-        "characterName": "샤먼",
-        "dialogueText": "우리가 심연을 들여보면 심연 또한 우리를 들여보는 법이니...",
-        "lineTimeout": 0,
-        "Option": "None"
-      },
+    {
+      "eventPoint": "1_1clear",
+      "characterName": "원숭이의 민첩함",
+      "dialogueText": "벽에서 space 키를 누름으로써 벽에서 점프할수 있습니다\n덩쿨에서 화살표 위 키를 누름으로써 덩쿨을 탈 수 있습니다",
+      "lineTimeout": 0,
+      "Option": "None"
+    },
 
 
-      {
-        "eventPoint": "2_1clear",
-        "characterName": "코뿔소의 힘",
-        "dialogueText": "shift 키를 누름으로써 원하는 방향으로 빠르게 돌진할수 있습니다\n돌진은 약한 벽을 파괴합니다.",
-        "lineTimeout": 0,
-        "Option": "None"
-      },
-      {
-        "eventPoint": "2_1clear",
-        "characterName": " ",
-        "dialogueText": "이상한 소리가 들려옵니다...",
-        "lineTimeout": 0,
-        "Option": "Shaking"
-      },
+    {
+      "eventPoint": "1_2clear",
+      "characterName": "샤먼",
+      "dialogueText": "잘했다 카프톤! 이제 코뿔소의 힘과 고릴라의 심장이 남았군",
+      "lineTimeout": 0,
+      "Option": "None"
+    },
+    {
+      "eventPoint": "1_2clear",
+      "characterName": "샤먼",
+      "dialogueText": "다만 괴수 마캄을 조심하도록!",
+      "lineTimeout": 0,
+      "Option": "None"
+    },
+    {
+      "eventPoint": "1_2clear",
+      "characterName": "샤먼",
+      "dialogueText": "우리가 심연을 들여보면 심연 또한 우리를 들여보는 법이니...",
+      "lineTimeout": 0,
+      "Option": "None"
+    },
 
-      {
-        "eventPoint": "2_2clear",
-        "characterName": "샤먼",
-        "dialogueText": "여긴 내가 막고 있겠네! 어서 고릴라의 심장을!",
-        "lineTimeout": 0,
-        "Option": "None"
-      },
 
-      {
-        "eventPoint": "ending",
-        "characterName": " ",
-        "dialogueText": "축하합니다! Jungle Ranger를 클리어 하였습니다!",
-        "lineTimeout": 0,
-        "Option": "None"
-      },
-      {
-        "eventPoint": "ending",
-        "characterName": " ",
-        "dialogueText": "이제 원하는 스테이지를 선택할수 있습니다",
-        "lineTimeout": 0,
-        "Option": "None"
-      },
-      {
-        "eventPoint": "ending",
-        "characterName": " ",
-        "dialogueText": "하드코어 모드가 해방되었습니다 자신의 한계에 도전해 보세요!",
-        "lineTimeout": 0,
-        "Option": "None"
-      }
-    ]
+    {
+      "eventPoint": "2_1clear",
+      "characterName": "코뿔소의 힘",
+      "dialogueText": "shift 키를 누름으로써 원하는 방향으로 빠르게 돌진할수 있습니다\n돌진은 약한 벽을 파괴합니다.",
+      "lineTimeout": 0,
+      "Option": "None"
+    },
+    {
+      "eventPoint": "2_1clear",
+      "characterName": " ",
+      "dialogueText": "이상한 소리가 들려옵니다...",
+      "lineTimeout": 0,
+      "Option": "Shaking"
+    },
+
+    {
+      "eventPoint": "2_2clear",
+      "characterName": "샤먼",
+      "dialogueText": "여긴 내가 막고 있겠네! 어서 고릴라의 심장을!",
+      "lineTimeout": 0,
+      "Option": "None"
+    },
+
+    {
+      "eventPoint": "ending",
+      "characterName": " ",
+      "dialogueText": "축하합니다! Jungle Ranger를 클리어 하였습니다!",
+      "lineTimeout": 0,
+      "Option": "None"
+    }
+  ]
 }
