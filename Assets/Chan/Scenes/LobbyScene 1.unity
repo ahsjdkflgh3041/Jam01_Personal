@@ -2051,6 +2051,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: MovingSeesaw
       objectReference: {fileID: 0}
+    - target: {fileID: 2979263366490165778, guid: f3e752e1a125c07488f1490d8ba89d30, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.8257973
+      objectReference: {fileID: 0}
+    - target: {fileID: 2979263366490165778, guid: f3e752e1a125c07488f1490d8ba89d30, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -7.8589997
+      objectReference: {fileID: 0}
+    - target: {fileID: 2979263367101315108, guid: f3e752e1a125c07488f1490d8ba89d30, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.8257973
+      objectReference: {fileID: 0}
+    - target: {fileID: 2979263367101315108, guid: f3e752e1a125c07488f1490d8ba89d30, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -7.8589997
+      objectReference: {fileID: 0}
     - target: {fileID: 5731556550417071949, guid: f3e752e1a125c07488f1490d8ba89d30, type: 3}
       propertyPath: movingTime
       value: 10
@@ -2078,6 +2094,14 @@ PrefabInstance:
     - target: {fileID: 8386756261213514789, guid: f3e752e1a125c07488f1490d8ba89d30, type: 3}
       propertyPath: movingOnTouch
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9218948939741560706, guid: f3e752e1a125c07488f1490d8ba89d30, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.704295
+      objectReference: {fileID: 0}
+    - target: {fileID: 9218948939741560706, guid: f3e752e1a125c07488f1490d8ba89d30, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -7.8
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 389623493563227717, guid: f3e752e1a125c07488f1490d8ba89d30, type: 3}
