@@ -18,6 +18,7 @@ TagManager:
   - MonkeyPowerUp
   - End
   - Mushroom
+  - HiddenCollection
   layers:
   - Default
   - TransparentFX

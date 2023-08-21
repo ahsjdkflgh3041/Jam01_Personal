@@ -6,15 +6,19 @@ using UnityEngine.Serialization;
 
 public class JunglePlayerController : MonoBehaviour
 {
+    [SerializeField]
+    private Transform endingRespawnPoint;
+
+    private GameObject endingPointObj;
+
+    private bool isGotRelic = false;
+
     [Header("Characters")]
     [SerializeField]
     private List<GameObject> playerModels;
 
     [SerializeField]
     private GameObject finalEnemy;
-
-    [SerializeField]
-    private GameObject endText;
 
     //0 사람 1 원숭이 2 코뿔소 3 고릴라
     private int _characterLevel;
@@ -28,14 +32,7 @@ public class JunglePlayerController : MonoBehaviour
         {
             for (int i = 0; i < playerModels.Count; i++)
             {
-                if (i == value)
-                {
-                    playerModels[i].SetActive(true);
-                }
-                else
-                {
-                    playerModels[i].SetActive(false);
-                }
+                playerModels[i].SetActive(i == value);
             }
             _characterLevel = value;
         }
@@ -59,8 +56,7 @@ public class JunglePlayerController : MonoBehaviour
     [SerializeField]
     private int doorAhead = 0;
 
-    [SerializeField]
-    private RectTransform BS;
+
     private bool desiredSceneChange;
     private bool onDoor;
     
@@ -175,11 +171,17 @@ public class JunglePlayerController : MonoBehaviour
 
     private float wallElapsedTime = 0f;
 
+    private int checkCollisionPosition;
+
 [Header("GameManager")]
     [SerializeField]
     private JungleGameManager gameManager;
     private Transform targetPosition;
     private int fromTo;
+
+[Header("UI")]
+    [SerializeField]
+    private RectTransform BS;
 
 
     void OnValidate()
@@ -208,7 +210,9 @@ public class JunglePlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
             Respawn();
-        
+
+        //InputCheatKey();
+
         if (!RestrictInputWhenDash)
         {
             playerInput.x = Input.GetAxis("Horizontal");
@@ -245,7 +249,6 @@ public class JunglePlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        InputCheatKey();
 
         UpdateState();
 
@@ -304,7 +307,7 @@ public class JunglePlayerController : MonoBehaviour
             faceRight = true;
         }
 
-        if (OnSteep && characterLevel >= 1 && playerInput.x != 0)
+        if (OnSteep && characterLevel >= 1 && playerInput.x * checkCollisionPosition > 0)
         {
             Steep();
         }
@@ -346,7 +349,6 @@ public class JunglePlayerController : MonoBehaviour
         transform.position = targetPosition.position;
         yield return new WaitForSeconds(.5f);
         BS.gameObject.SetActive(false);
-        Debug.Log(fromTo);
         
         
     }
@@ -357,6 +359,14 @@ public class JunglePlayerController : MonoBehaviour
         transform.position = RespawnPoint;
         gameManager.Respawn();
         velocity = Vector2.zero;
+    }
+
+    public void RespawnAfterBadEnding()
+    {
+        endingPointObj.SetActive(true);
+        RespawnPoint = endingRespawnPoint.position;
+        characterLevel = 2;
+        Respawn();
     }
 
     void Jump()
@@ -374,7 +384,7 @@ public class JunglePlayerController : MonoBehaviour
         {
             jumpDirection = contactNormal;
         }
-        else if (OnSteep && characterLevel >= 1 && playerInput.x != 0)
+        else if (OnSteep && characterLevel >= 1 && playerInput.x * checkCollisionPosition > 0)
         {
             jumpDirection = steepNormal;
             jumpPhase = 0;
@@ -546,9 +556,14 @@ public class JunglePlayerController : MonoBehaviour
     {
         if (characterLevel >= 3)
         {
-            Time.timeScale = 0f;
-            BS.gameObject.SetActive(true);
-            endText.SetActive(true);
+            if (!isGotRelic)
+            {
+                gameManager.PlayBadEnding();
+            }
+            else
+            {
+                gameManager.PlayGoodEnding();
+            }
         }
         if (collision.gameObject.CompareTag("MovingPlatform"))
         {
@@ -626,6 +641,8 @@ public class JunglePlayerController : MonoBehaviour
                 if (groundContactCount == 0) {
                     connectedRb = collision.rigidbody;
                 }
+
+                checkCollisionPosition = transform.position.x < collision.transform.position.x ? 1 : -1;
             }
         }
     }
@@ -648,6 +665,7 @@ public class JunglePlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+
         if (collision.gameObject.CompareTag("DeadZone"))
             Respawn();
         if (collision.gameObject.CompareTag("Enemy"))
@@ -708,9 +726,11 @@ public class JunglePlayerController : MonoBehaviour
 
         if (collision.gameObject.CompareTag("End"))
         {
+            endingPointObj = collision.gameObject;
+            collision.gameObject.SetActive(false);
+            characterLevel = 3;
             gameManager.PlayDialogue(3);
             //끝
-            characterLevel = 3;
         }
 
         // 스테이지 이동 문
@@ -723,6 +743,13 @@ public class JunglePlayerController : MonoBehaviour
                 fromTo = door.fromTo;
                 onDoor = true;
             }
+        }
+
+        if (collision.gameObject.CompareTag("HiddenCollection"))
+        {
+            isGotRelic = true;
+            collision.gameObject.SetActive(false);
+            gameManager.PlayDialogue(01);
         }
     }
 

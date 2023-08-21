@@ -12,6 +12,7 @@ public class CameraShake : MonoBehaviour
 
     Vector3 initialPosition;
 
+    [SerializeField]
     private float currentShakeDuration = 0f;
 
     private void OnEnable()
@@ -22,7 +23,10 @@ public class CameraShake : MonoBehaviour
     public void TriggerShake()
     {
         initialPosition = transform.position;
-        JungleCamera.enabled = false;
+        if (JungleCamera != null)
+        {
+            JungleCamera.enabled = false;
+        }
         currentShakeDuration = shakeDuration;
     }
 
@@ -37,7 +41,11 @@ public class CameraShake : MonoBehaviour
         {
             currentShakeDuration = 0f;
             transform.position = initialPosition;
-            JungleCamera.enabled = true;
+            if (JungleCamera != null)
+            {
+                JungleCamera.enabled = true;
+
+            }
         }
     }
 }

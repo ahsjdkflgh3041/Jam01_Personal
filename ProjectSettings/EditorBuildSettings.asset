@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Chan/Scenes/LobbyScene 1.unity
     guid: 678a61d6443022a458f90cb8bb13fd18
+  - enabled: 1
+    path: Assets/SeongMin/Assets/Scenes/EndingScene.unity
+    guid: aca3334a82a0a4b4e9ffe135c5038d64
   m_configObjects: {}

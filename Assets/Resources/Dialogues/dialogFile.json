@@ -87,15 +87,23 @@
     {
       "eventPoint": "ending",
       "characterName": " ",
-      "dialogueText": "축하합니다! Jungle Ranger를 클리어 하였습니다!",
+      "dialogueText": "또다시 이상한 소리가 들려옵니다...",
       "lineTimeout": 0,
-      "Option": "None"
+      "Option": "Shaking"
     },
 
     {
       "eventPoint": "getJewel",
       "characterName": "이상한 보석",
       "dialogueText": "이상한 빛이 나는 보석입니다 어딘가 쓸 수 있는곳이 있을지도?",
+      "lineTimeout": 0,
+      "Option": "None"
+    },
+
+    {
+      "eventPoint": "getRelic",
+      "characterName": "고대의 유물",
+      "dialogueText": "이거라면 당신을 지켜줄 겁니다.",
       "lineTimeout": 0,
       "Option": "None"
     }

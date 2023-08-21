@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class JungleGameManager : MonoBehaviour
 {
@@ -27,6 +28,15 @@ public class JungleGameManager : MonoBehaviour
 
     [SerializeField]
     private JungleDoor hiddenDoor;
+
+    [SerializeField]
+    private GameObject badEndingScreen;
+
+    [SerializeField]
+    private GameObject goodEndingScreen;
+
+    [SerializeField]
+    private GameObject playerPrefab;
 
     void Start()
     {
@@ -56,6 +66,27 @@ public class JungleGameManager : MonoBehaviour
         return true;
     }
 
+    public void PlayBadEnding()
+    {
+        badEndingScreen.SetActive(true);
+    }
+
+    public void PlayGoodEnding()
+    {
+        goodEndingScreen.SetActive(true);
+    }
+
+    public void LoadGoodEnding()
+    {
+        SceneManager.LoadScene("EndingScene");
+    }
+
+
+    public void RespawnAfterBadEnding()
+    {
+        badEndingScreen.SetActive(false);
+    }
+
     public void PlayDialogue(int index)
     {
         switch (index)
@@ -72,11 +103,14 @@ public class JungleGameManager : MonoBehaviour
             case 22:
                 dialogueMan?.PlayDialogue("2_2clear");
                 break;
-            case 3:
+            case 3://배드엔딩
                 dialogueMan?.PlayDialogue("ending");
                 break;
             case 0://보석 획득
                 dialogueMan?.PlayDialogue("getJewel");
+                break;
+            case 01://유물 획득
+                dialogueMan?.PlayDialogue("getRelic");
                 break;
             default:
                 break;

@@ -11,6 +11,11 @@ public class JungleDoor : MonoBehaviour
 
     private SpriteRenderer spriteRenderer;
 
+    private void Awake()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
     public bool isActive {
         get 
         {
@@ -31,10 +36,5 @@ public class JungleDoor : MonoBehaviour
                 }
             }
         }
-    }
-
-    private void Start()
-    {
-        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 }

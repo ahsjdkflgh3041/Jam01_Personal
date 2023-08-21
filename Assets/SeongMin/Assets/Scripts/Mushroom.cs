@@ -10,8 +10,6 @@ public class Mushroom : MonoBehaviour
 
     private float rotation;
 
-    private SpriteRenderer spriteRenderer;
-
     [SerializeField]
     private AudioSource boing;
 
@@ -19,8 +17,6 @@ public class Mushroom : MonoBehaviour
 
     private void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.color = new Color(1f, 1f - (force / 50), 0f);
         rotation = transform.eulerAngles.z;
     }
 
